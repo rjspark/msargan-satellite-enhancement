@@ -1,84 +1,119 @@
----
-title: MSARGAN - Agricultural Satellite Image Enhancement
-emoji: 🛰️
-colorFrom: blue
-colorTo: green
-sdk: docker
-pinned: false
-license: mit
----
+# MSARGAN - Agricultural Satellite Image Enhancement
 
-# MSARGAN - Multi-Scale Attention Super-Resolution GAN
+🛰️ AI-powered system that enhances low-resolution satellite imagery for agricultural monitoring using Generative Adversarial Networks (GANs).
 
-## 🌾 Agricultural Satellite Image Enhancement System
+## 🌟 Features
 
-Transform low-resolution 64×64 satellite imagery into high-quality 256×256 outputs with AI-powered enhancement and agricultural analysis.
+- **4x Super-Resolution**: Transforms 64×64 images to high-quality 256×256 outputs
+- **Quality Metrics**: Provides PSNR and SSIM measurements
+- **NDVI Analysis**: Calculates Normalized Difference Vegetation Index for crop health
+- **Real-time Processing**: Fast inference using PyTorch
+- **Professional Web UI**: Modern, responsive interface with Flask
 
-### 🚀 Features
+## 🚀 Live Demo
 
-- **4x Super-Resolution**: Enhances 64×64 images to 256×256 with improved texture and structural clarity
-- **Quality Metrics**: Provides PSNR and SSIM measurements for quantifiable image quality
-- **NDVI Analysis**: Calculates Normalized Difference Vegetation Index for agricultural monitoring
-- **Real-time Processing**: Fast inference using PyTorch and GAN architecture
-- **Professional UI**: Modern, responsive web interface with smooth animations
+**Try it here:** [https://rjspark-msargan-app.hf.space](https://rjspark-msargan-app.hf.space)
 
-### 🎯 How to Use
+## 🏗️ Architecture
 
-1. **Upload** a 64×64 satellite image (or any image - it will be automatically resized)
-2. **Wait** for processing (typically 10-30 seconds)
-3. **View Results**:
-   - Original low-resolution input
-   - Enhanced 256×256 super-resolution image with PSNR/SSIM metrics
-   - NDVI vegetation analysis with color-coded visualization
+- **Generator Network**: 8 Residual Blocks with PReLU activation
+- **Training Strategy**: Adversarial + Perceptual + Pixel-wise losses
+- **Framework**: PyTorch with VGG19 feature extraction
+- **Upsampling**: Pixel Shuffle (2x → 2x for 4x total)
 
-### 🏗️ Architecture
+## 🛠️ Tech Stack
 
-- **Generator Network**: 
-  - 8 Residual Blocks with skip connections
-  - PReLU activation functions
-  - Batch Normalization
-  - Pixel Shuffle upsampling (4x total resolution boost)
+- **Backend**: Flask, PyTorch, Python
+- **Frontend**: HTML5, CSS3, JavaScript
+- **Deployment**: Docker, Hugging Face Spaces
+- **Image Processing**: PIL, NumPy, scikit-image, matplotlib
 
-- **Training Strategy**:
-  - Adversarial Loss (GAN)
-  - Perceptual Loss (VGG19 features)
-  - Pixel-wise MSE Loss
-  - Adam Optimizer
+## 📦 Installation
 
-### 📊 Performance
+### 1. Clone the repository
+```bash
+git clone https://github.com/rjspark/msargan-satellite-enhancement.git
+cd msargan-satellite-enhancement
+```
 
-The model provides measurable quality improvements:
-- **PSNR** (Peak Signal-to-Noise Ratio): Measures reconstruction quality
-- **SSIM** (Structural Similarity Index): Measures perceptual quality
-- **NDVI**: Agricultural vegetation health indicator
+### 2. Download the trained model
+Download `generator_latest.pth` from [Hugging Face](https://huggingface.co/spaces/rjspark/msargan-app/blob/main/generator_latest.pth) and place it in the root directory.
 
-### 🛠️ Built With
+### 3. Install dependencies
+```bash
+pip install -r requirements.txt
+```
 
-- PyTorch - Deep learning framework
-- Flask - Web framework
-- HTML/CSS/JavaScript - Frontend
-- Docker - Containerization
+### 4. Run the application
+```bash
+python app.py
+```
 
-### 📝 Use Cases
+Visit: `http://localhost:7860`
 
-- Agricultural monitoring and crop health assessment
+## 🐳 Docker Deployment
+```bash
+docker build -t msargan-app .
+docker run -p 7860:7860 msargan-app
+```
+
+## 📊 Model Performance
+
+- **Input**: 64×64 RGB satellite images
+- **Output**: 256×256 enhanced images
+- **Metrics**: PSNR and SSIM for quality assessment
+- **Additional**: NDVI calculation for vegetation analysis
+
+## 🌾 Use Cases
+
+- Agricultural crop health monitoring
 - Satellite image enhancement for analysis
 - Vegetation mapping and NDVI calculations
 - Remote sensing applications
 - Precision agriculture
 
-### 👨‍💻 Developer
+## 📁 Project Structure
+```
+msargan-satellite-enhancement/
+├── app.py                  # Flask backend
+├── generator_latest.pth    # Trained model (download separately)
+├── requirements.txt        # Dependencies
+├── Dockerfile             # Docker configuration
+├── templates/
+│   └── index.html         # Frontend HTML
+└── static/
+    ├── style.css          # Styling
+    └── script.js          # JavaScript
+```
 
-Created as a machine learning project demonstrating:
-- Deep learning model deployment
-- Full-stack web development
-- Agricultural AI applications
-- Cloud deployment with Docker
+## 🎯 Future Improvements
 
-### 📄 License
+- [ ] Batch processing for multiple images
+- [ ] GPU acceleration option
+- [ ] Additional vegetation indices (EVI, SAVI)
+- [ ] Comparison with other SR methods
+- [ ] Mobile app version
 
-MIT License - Feel free to use for educational and research purposes.
+## 📄 License
+
+MIT License - see LICENSE file for details
+
+## 👤 Author
+
+**rjspark**
+- Hugging Face: [@rjspark](https://huggingface.co/rjspark)
+- Live Demo: [MSARGAN App](https://rjspark-msargan-app.hf.space)
+
+## 🙏 Acknowledgments
+
+- Built using PyTorch deep learning framework
+- Deployed on Hugging Face Spaces
+- Inspired by SRGAN architecture
+
+## 📞 Contact
+
+For questions or collaboration opportunities, reach out via GitHub issues.
 
 ---
 
-**Note**: Processing is performed on CPU in this Space, so please allow 10-30 seconds for image enhancement.
+⭐ **Star this repo if you find it useful!**
