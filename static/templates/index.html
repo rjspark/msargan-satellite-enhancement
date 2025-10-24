@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSARGAN - Agricultural Satellite Image Enhancement</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <i class="fas fa-satellite"></i>
+                <span>MSARGAN</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#demo">Try Demo</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#results">Results</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Multi-Scale Attention Super-Resolution GAN</h1>
+                <p class="hero-subtitle">Transforming Low-Resolution Satellite Imagery for Agricultural Intelligence</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-value">4x</span>
+                        <span class="stat-label">Resolution Boost</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">256×256</span>
+                        <span class="stat-label">Output Quality</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">NDVI</span>
+                        <span class="stat-label">Analysis Ready</span>
+                    </div>
+                </div>
+                <a href="#demo" class="cta-button">
+                    <span>Try Live Demo</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 class="section-title">About the Project</h2>
+            <div class="about-grid">
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Deep Learning Architecture</h3>
+                    <p>MSARGAN employs a sophisticated Generative Adversarial Network with multi-scale attention mechanisms, residual blocks, and perceptual loss for superior image quality.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h3>Agricultural Monitoring</h3>
+                    <p>Designed specifically for agricultural applications, enabling precise crop health assessment through enhanced satellite imagery and NDVI calculations.</p>
+                </div>
+                <div class="about-card">
+                    <div class="about-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Measurable Performance</h3>
+                    <p>Delivers quantifiable improvements with PSNR and SSIM metrics, ensuring reliable image enhancement for critical agricultural decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <h2 class="section-title">Live Demo</h2>
+            <p class="section-description">Upload a 64×64 satellite image to see the AI enhancement in action</p>
+            
+            <div class="demo-container">
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="imageInput" accept="image/*" hidden>
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Upload Satellite Image</h3>
+                        <p>Click to select or drag & drop a 64×64 image</p>
+                        <p class="upload-hint">Supports: JPG, PNG (Max: 16MB)</p>
+                    </div>
+                </div>
+
+                <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Processing your image...</p>
+                </div>
+
+                <div class="results-container" id="resultsContainer" style="display: none;">
+                    <div class="results-grid">
+                        <!-- Input Image -->
+                        <div class="result-card">
+                            <h3><i class="fas fa-image"></i> Input (64×64)</h3>
+                            <div class="image-wrapper">
+                                <img id="inputImage" alt="Input Image">
+                            </div>
+                        </div>
+
+                        <!-- Enhanced Image -->
+                        <div class="result-card featured">
+                            <h3><i class="fas fa-magic"></i> Enhanced (256×256)</h3>
+                            <div class="image-wrapper">
+                                <img id="enhancedImage" alt="Enhanced Image">
+                            </div>
+                            <div class="metrics">
+                                <div class="metric">
+                                    <span class="metric-label">PSNR</span>
+                                    <span class="metric-value" id="psnrValue">--</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="metric-label">SSIM</span>
+                                    <span class="metric-value" id="ssimValue">--</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- NDVI Analysis -->
+                        <div class="result-card">
+                            <h3><i class="fas fa-leaf"></i> NDVI Analysis</h3>
+                            <div class="image-wrapper">
+                                <img id="ndviImage" alt="NDVI Image">
+                            </div>
+                            <div class="ndvi-info">
+                                <div class="ndvi-value">
+                                    <span class="label">Average NDVI:</span>
+                                    <span class="value" id="ndviValue">--</span>
+                                </div>
+                                <div class="ndvi-interpretation" id="ndviInterpretation">
+                                    --
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="reset-button" id="resetButton">
+                        <i class="fas fa-redo"></i> Process Another Image
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Image Input</h3>
+                        <p>Low-resolution 64×64 satellite image is received as input</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Feature Extraction</h3>
+                        <p>Deep convolutional layers extract spatial features and patterns</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Residual Processing</h3>
+                        <p>8 residual blocks enhance features while preserving details</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Upsampling</h3>
+                        <p>Pixel shuffle layers progressively increase resolution 4x</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Quality Metrics</h3>
+                        <p>PSNR and SSIM calculated to measure enhancement quality</p>
+                    </div>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>NDVI Calculation</h3>
+                        <p>Vegetation index computed for agricultural analysis</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Details Section -->
+    <section id="results" class="technical-section">
+        <div class="container">
+            <h2 class="section-title">Technical Architecture</h2>
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <h3>Generator Network</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> 8 Residual Blocks</li>
+                        <li><i class="fas fa-check"></i> PReLU Activation</li>
+                        <li><i class="fas fa-check"></i> Batch Normalization</li>
+                        <li><i class="fas fa-check"></i> Pixel Shuffle Upsampling</li>
+                    </ul>
+                </div>
+                <div class="tech-card">
+                    <h3>Training Strategy</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Adversarial Loss</li>
+                        <li><i class="fas fa-check"></i> Perceptual Loss (VGG19)</li>
+                        <li><i class="fas fa-check"></i> Pixel-wise MSE Loss</li>
+                        <li><i class="fas fa-check"></i> Adam Optimizer</li>
+                    </ul>
+                </div>
+                <div class="tech-card">
+                    <h3>Performance Metrics</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> PSNR (Peak Signal-to-Noise Ratio)</li>
+                        <li><i class="fas fa-check"></i> SSIM (Structural Similarity)</li>
+                        <li><i class="fas fa-check"></i> NDVI (Vegetation Index)</li>
+                        <li><i class="fas fa-check"></i> Real-time Processing</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-satellite"></i> MSARGAN</h3>
+                    <p>Advanced AI-powered satellite image enhancement for agricultural monitoring and analysis.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Technologies</h4>
+                    <p>PyTorch • GANs • Deep Learning<br>Computer Vision • Agriculture AI</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Connect</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 MSARGAN Project. Built with PyTorch and Flask.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
