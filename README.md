@@ -13,7 +13,10 @@
 ## 🚀 Live Demo
 
 **Try it here:** [https://rjspark-msargan-app.hf.space](https://rjspark-msargan-app.hf.space)
-
+<img width="947" height="444" alt="Image" src="https://github.com/user-attachments/assets/3db89094-1237-42ea-a722-c593046b9e4c" />
+<img width="711" height="433" alt="Image" src="https://github.com/user-attachments/assets/65884142-cb1d-4af1-8b21-1772c59ccdce" />
+<img width="783" height="425" alt="Image" src="https://github.com/user-attachments/assets/e7d2d0a9-fbac-4d76-ad72-2c5022e7c73b" />
+<img width="765" height="440" alt="Image" src="https://github.com/user-attachments/assets/9f637939-d36b-4f3d-b9b2-d0b156f248cc" />
 
 ## 🏗️ Architecture
 
