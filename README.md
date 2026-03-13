@@ -14,6 +14,7 @@
 
 **Try it here:** [https://rjspark-msargan-app.hf.space](https://rjspark-msargan-app.hf.space)
 
+
 ## 🏗️ Architecture
 
 - **Generator Network**: 8 Residual Blocks with PReLU activation
